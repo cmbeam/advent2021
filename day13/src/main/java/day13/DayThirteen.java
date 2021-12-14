@@ -18,7 +18,7 @@ public class DayThirteen {
         }
 
         try {
-            File myObj = new File("/Users/cbeam/GIT/advent2021/day13/src/main/resources/input_day13.txt");
+            File myObj = new File("input_day13.txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
