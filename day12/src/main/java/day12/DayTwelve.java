@@ -8,7 +8,7 @@ public class DayTwelve {
 
         Map<String, CaveNode> nodes = new HashMap<>();
         try {
-            File myObj = new File("/Users/cbeam/GIT/advent2021/day12/src/main/resources/input_day12.txt");
+            File myObj = new File("input_day12.txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
