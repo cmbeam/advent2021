@@ -13,7 +13,7 @@ public class DayEleven {
         int[][] grid = new int[sizeX][sizeY];
 
         try {
-            File myObj = new File("/Users/cbeam/GIT/advent2021/day11/src/main/resources/test_day11.txt");
+            File myObj = new File("test_day11.txt");
             Scanner myReader = new Scanner(myObj);
 
             int row = 1;
