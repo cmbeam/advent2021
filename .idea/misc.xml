@@ -4,6 +4,11 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/Day6J/pom.xml" />
+        <option value="$PROJECT_DIR$/day20/pom.xml" />
+        <option value="$PROJECT_DIR$/day19/pom.xml" />
+        <option value="$PROJECT_DIR$/day24/pom.xml" />
+        <option value="$PROJECT_DIR$/day25/pom.xml" />
+        <option value="$PROJECT_DIR$/day18/pom.xml" />
       </list>
     </option>
   </component>

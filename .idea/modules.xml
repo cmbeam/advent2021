@@ -3,6 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/advent2021.iml" filepath="$PROJECT_DIR$/.idea/advent2021.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day18/day18.iml" filepath="$PROJECT_DIR$/day18/day18.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day19/day19.iml" filepath="$PROJECT_DIR$/day19/day19.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day20/day20.iml" filepath="$PROJECT_DIR$/day20/day20.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day24/day24.iml" filepath="$PROJECT_DIR$/day24/day24.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day25/day25.iml" filepath="$PROJECT_DIR$/day25/day25.iml" />
       <module fileurl="file://$PROJECT_DIR$/Day6J/day6J.iml" filepath="$PROJECT_DIR$/Day6J/day6J.iml" />
     </modules>
   </component>

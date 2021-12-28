@@ -13,7 +13,7 @@ public class DayTwenty {
         Map<Point, Character> imageArray = new HashMap<>();
 
         try {
-            File myObj = new File("/advent2021/day20/src/main/resources/input_day20.txt");
+            File myObj = new File("/Users/cbeam/GIT/advent2021/day20/src/main/resources/input_day20.txt");
             Scanner myReader = new Scanner(myObj);
             ieAlgorithm = myReader.nextLine().toCharArray();
             myReader.nextLine();
@@ -52,7 +52,7 @@ public class DayTwenty {
                                 }
                             }
                             else{
-                                if(enhancements > 0 && ieAlgorithm[0] == '#') {
+                                if(Math.floorMod(enhancements, 2) == 1 && ieAlgorithm[0] == '#') {
                                     binaryString = binaryString + '1';
                                 }
                                 else{
