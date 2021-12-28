@@ -9,13 +9,13 @@ public class BinaryTree {
     Node root;
 
     public void create(String pair) {
-        root = new Node(null);
+        root = new Node(null, null);
         root = addRecursive(root, pair);
     }
 
     private Node addRecursive(Node current, String pairString) {
         if(pairString.matches("-?\\d+")){
-            return new Node(Integer.parseInt(pairString));
+            return new Node(Integer.parseInt(pairString), current);
         }
         else {
             int brackets = 0;
@@ -35,15 +35,15 @@ public class BinaryTree {
             }
 //            System.out.println(leftSide);
 //            System.out.println(rightSide);
-            Node left = new Node(null);
-            Node right = new Node(null);
+            Node left = new Node(null, current);
+            Node right = new Node(null, current);
             current.left = addRecursive(left, leftSide);
             current.right = addRecursive(right, rightSide);
         }
 
 
         if (current == null) {
-            return new Node(Integer.parseInt(pairString));
+            return new Node(Integer.parseInt(pairString), null);
         }
 
         return current;
@@ -122,60 +122,177 @@ public class BinaryTree {
         return root.left == null ? root.value : findSmallestValue(root.left);
     }
 
-//    public boolean explode(Node node, int level) {
-//        if(node==null)
-//            return false;
-//        if(node.left == null){
-//            return false;
-//        }
-//        if(node.right == null){
-//            return false;
-//        }
-//        if(node.left.value !=null && node.right.value != null){
-//
-//            if(level == 5) {
-//                System.out.println("level 4: " + node.left.value + " " + node.right.value);
-//                return false;
-//            }
-//            else
-//                return false;
-//        }
-//        else{
-//            return (explode(node.left, level+1) || explode(node.right,level+1));
-//        }
-//    }
+    private Node findClosestLeftValueNode(Node child) {
+        if (child.parent == null) {
+            if (child.left.value == null) {
+                return findClosestRightDownValueNode(child.left);
+            }
+            else
+                return null;
+        }
+        if (child.parent.left.value != null) {
+            return child.parent.left;
+        }
+        if (child.parent.left.value == null) {
+            Node rightDownNode = findClosestRightDownValueNode(child.parent.left);
+            if (rightDownNode != null)
+                return rightDownNode;
+        }
 
-    public int explode(Node node, int level, int left) {
+        return findClosestLeftValueNode(child.parent);
+
+    }
+
+    private Node findClosestRightValueNode(Node child){
+        if(child.parent == null){
+            if(child.right.value == null){
+                return findClosestLeftDownValueNode(child.right);
+            }
+            else
+                return null;
+        }
+        if(child.parent.right.value != null){
+            return child.parent.right;
+        }
+        if(child.parent.right.value == null){
+            Node leftDownNode = findClosestLeftDownValueNode(child.parent.right);
+            if (leftDownNode != null)
+                return leftDownNode;
+        }
+        return findClosestRightValueNode(child.parent);
+
+    }
+
+    private Node findClosestLeftDownValueNode(Node child){
+        if(child.left.value != null){
+            return child.left;
+        }
+        if(child.left.value == null) {
+            Node rightDownNode = findClosestRightDownValueNode(child.left);
+            if (rightDownNode != null)
+                return rightDownNode;
+        }
+
+        return findClosestLeftDownValueNode(child.right);
+
+    }
+
+    private Node findClosestRightDownValueNode(Node child){
+        if(child.right == null)
+            return null;
+        if(child.right.value != null){
+            return child.right;
+        }
+        if(child.right.value == null) {
+            Node leftDownNode = findClosestLeftDownValueNode(child.right);
+            if (leftDownNode != null)
+                return leftDownNode;
+        }
+        return findClosestRightDownValueNode(child.left);
+
+    }
+
+    public boolean explode(Node node, int level) {
+
         if (level == 4) {
+            if(node == null) {
+                return false;
+            }
+
+            if(node.left == null || node.right == null){
+                return false;
+            }
             int nLeft, nRight;
             if (node.left.value == null) {
                 nLeft = node.left.left.value;
                 nRight = node.left.right.value;
                 node.left.left = null;
                 node.left.right = null;
-                if (left == 0) {
-                    node.left.value = 0;
-                } else {
-                    node.left.value = left + nLeft;
+
+                //Left
+                Node leftNode = findClosestLeftValueNode(node);
+                if (leftNode != null)  {
+                    leftNode.value = leftNode.value + nLeft;
                 }
-                return nRight;
+
+                //Right
+                Node rightNode = null;
+                if(node.right.value != null){
+                    rightNode = node;
+                }
+                else {
+                    rightNode = findClosestRightValueNode(node);
+//                    rightNode = findClosestLeftValueNode(node);
+                }
+                if (rightNode != null) {
+                    rightNode.value = rightNode.value + nRight;
+                }
+
+                //Replace left node with 0 regular number node
+                node.left.left = null;
+                node.left.right = null;
+                node.left.value = 0;
+
+                return true;
             }
             if (node.right.value == null) {
                 nLeft = node.right.left.value;
                 nRight = node.right.right.value;
                 node.right.left = null;
                 node.right.right = null;
-                if (left == 0) {
-                    node.left.value = 0;
+
+                //Left
+                Node leftNode = null;
+                if(node.left.value != null){
+                    leftNode = node;
                 }
-                return nRight;
+                else {
+                    leftNode = findClosestLeftValueNode(node);
+                }
+                if (leftNode != null) {
+                    leftNode.left.value = leftNode.left.value + nLeft;
+                }
+
+                //Right
+                Node rightNode = findClosestRightValueNode(node);
+                if (rightNode != null)  {
+                    rightNode.value = rightNode.value + nRight;
+                }
+
+                //Replace right node with 0 regular number node
+                node.right.left = null;
+                node.right.right = null;
+                node.right.value = 0;
+
+                return true;
             }
+            return false;
         }
-        return -1;
+        else{
+            level++;
+            return (explode(node.left, level ) || explode(node.right, level));
+        }
     }
 
-    public boolean pair(Node node) {
-        return false;
+    public boolean split(Node node) {
+        if(node == null)
+            return false;
+        if(node.value != null && node.value > 9){
+            int highValue = node.value;
+            int leftValue = highValue / 2;
+            int rightValue =highValue / 2;
+            if(Math.floorMod(highValue, 2) > 0)
+                rightValue++;
+            Node rightNode = new Node(rightValue,node);
+            Node leftNode = new Node(leftValue,node);
+            node.value = null;
+            node.left = leftNode;
+            node.right = rightNode;
+           // System.out.println("Original: " + highValue +" Left split: " + leftValue + " Right split: "+rightValue);
+            return true;
+        }
+        return (split(node.left) || split(node.right));
+
     }
 
     public String traverseInOrder(Node node) {
@@ -306,11 +423,11 @@ public class BinaryTree {
     }
     public void add(String pairString){
         if(this.root == null){
-            Node root = new Node(null);
+            Node root = new Node(null, null);
             this.root = addRecursive(root,pairString);
         }
         else{
-            Node newRoot = new Node(null);
+            Node newRoot = new Node(null, null);
             newRoot.left = this.root;
             newRoot.right = addRecursive(newRoot,pairString);
             this.root = newRoot;
@@ -321,11 +438,13 @@ public class BinaryTree {
         Integer value;
         Node left;
         Node right;
+        Node parent;
 
-        Node(Integer value) {
+        Node(Integer value, Node parent) {
             this.value = value;
             right = null;
             left = null;
+            this.parent = parent;
         }
     }
 }

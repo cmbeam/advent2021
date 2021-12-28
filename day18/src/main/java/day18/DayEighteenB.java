@@ -12,7 +12,7 @@ public class DayEighteenB {
     public static void main(String[] args) {
         List<String> inputs = new ArrayList<>();
         try {
-            File myObj = new File("/Users/cbeam/GIT/advent2021/day18/src/main/resources/test1_day18.txt");
+            File myObj = new File("/Users/cbeam/GIT/advent2021/day18/src/main/resources/test2_day18.txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
@@ -35,10 +35,14 @@ public class DayEighteenB {
                 runningCalculation = "[" + runningCalculation + "," + input + "]";
                 tree.create(runningCalculation);
                 runningCalculation = ""+ tree.traverseInOrder(tree.root);
+                System.out.println(runningCalculation);
                 boolean calculating = true;
                 while(calculating){
-                    tree.explode(tree.root, 1, 0);
-                    tree.pair(tree.root);
+                    calculating = (tree.explode(tree.root, 1) || tree.split(tree.root)) ;
+//                    tree.pair(tree.root);
+
+                    runningCalculation = ""+ tree.traverseInOrder(tree.root);
+                    System.out.println("calculation: "+ runningCalculation);
                 }
             }
 

@@ -16,21 +16,27 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="day25" />
-        <module name="day24" />
-        <module name="day19" />
-        <module name="day18" />
+        <module name="day7j" />
+        <module name="day14" />
+        <module name="day23" />
+        <module name="day10" />
+        <module name="day21" />
         <module name="day20" />
+        <module name="day4j" />
+        <module name="day5j" />
         <module name="day6J" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="day18" target="17" />
-      <module name="day19" target="17" />
+      <module name="day10" target="17" />
+      <module name="day14" target="17" />
       <module name="day20" target="17" />
-      <module name="day24" target="17" />
-      <module name="day25" target="17" />
+      <module name="day21" target="17" />
+      <module name="day23" target="17" />
+      <module name="day4j" target="17" />
+      <module name="day5j" target="17" />
       <module name="day6J" target="8" />
+      <module name="day7j" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

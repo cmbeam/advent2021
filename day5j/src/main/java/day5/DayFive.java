@@ -17,7 +17,7 @@ public class DayFive {
         }
 
         try {
-            File myObj = new File("/Users/cbeam/GIT/advent2021/day5j/src/main/resources/input_day5.txt");
+            File myObj = new File("input_day5.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String[] coordinates = myReader.nextLine().split(" -> ");
