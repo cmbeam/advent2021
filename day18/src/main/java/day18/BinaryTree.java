@@ -122,16 +122,25 @@ public class BinaryTree {
         return root.left == null ? root.value : findSmallestValue(root.left);
     }
 
-    private Node findClosestLeftValueNode(Node child){
-        if(child.parent == null){
-            return null;
+    private Node findClosestLeftValueNode(Node child) {
+        if (child.parent == null) {
+            if (child.left.value == null) {
+                return findClosestRightDownValueNode(child.left);
+            }
+            else
+                return null;
         }
-        if(child.parent.left.value != null){
-            return child.parent;
+        if (child.parent.left.value != null) {
+            return child.parent.left;
         }
-        else{
-            return findClosestLeftValueNode(child.parent);
+        if (child.parent.left.value == null) {
+            Node rightDownNode = findClosestRightDownValueNode(child.parent.left);
+            if (rightDownNode != null)
+                return rightDownNode;
         }
+
+        return findClosestLeftValueNode(child.parent);
+
     }
 
     private Node findClosestRightValueNode(Node child){
@@ -145,18 +154,42 @@ public class BinaryTree {
         if(child.parent.right.value != null){
             return child.parent.right;
         }
-        else{
-            return findClosestRightValueNode(child.parent);
+        if(child.parent.right.value == null){
+            Node leftDownNode = findClosestLeftDownValueNode(child.parent.right);
+            if (leftDownNode != null)
+                return leftDownNode;
         }
+        return findClosestRightValueNode(child.parent);
+
     }
 
     private Node findClosestLeftDownValueNode(Node child){
         if(child.left.value != null){
             return child.left;
         }
-        else{
-            return findClosestLeftDownValueNode(child.right);
+        if(child.left.value == null) {
+            Node rightDownNode = findClosestRightDownValueNode(child.left);
+            if (rightDownNode != null)
+                return rightDownNode;
         }
+
+        return findClosestLeftDownValueNode(child.right);
+
+    }
+
+    private Node findClosestRightDownValueNode(Node child){
+        if(child.right == null)
+            return null;
+        if(child.right.value != null){
+            return child.right;
+        }
+        if(child.right.value == null) {
+            Node leftDownNode = findClosestLeftDownValueNode(child.right);
+            if (leftDownNode != null)
+                return leftDownNode;
+        }
+        return findClosestRightDownValueNode(child.left);
+
     }
 
     public boolean explode(Node node, int level) {
@@ -179,7 +212,7 @@ public class BinaryTree {
                 //Left
                 Node leftNode = findClosestLeftValueNode(node);
                 if (leftNode != null)  {
-                    leftNode.left.value = leftNode.left.value + nLeft;
+                    leftNode.value = leftNode.value + nLeft;
                 }
 
                 //Right
@@ -192,7 +225,7 @@ public class BinaryTree {
 //                    rightNode = findClosestLeftValueNode(node);
                 }
                 if (rightNode != null) {
-                    rightNode.right.value = rightNode.right.value + nRight;
+                    rightNode.value = rightNode.value + nRight;
                 }
 
                 //Replace left node with 0 regular number node
