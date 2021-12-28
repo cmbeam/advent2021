@@ -136,13 +136,26 @@ public class BinaryTree {
 
     private Node findClosestRightValueNode(Node child){
         if(child.parent == null){
-            return null;
+            if(child.right.value == null){
+                return findClosestLeftDownValueNode(child.right);
+            }
+            else
+                return null;
         }
         if(child.parent.right.value != null){
-            return child.parent;
+            return child.parent.right;
         }
         else{
             return findClosestRightValueNode(child.parent);
+        }
+    }
+
+    private Node findClosestLeftDownValueNode(Node child){
+        if(child.left.value != null){
+            return child.left;
+        }
+        else{
+            return findClosestLeftDownValueNode(child.right);
         }
     }
 
@@ -210,7 +223,7 @@ public class BinaryTree {
                 //Right
                 Node rightNode = findClosestRightValueNode(node);
                 if (rightNode != null)  {
-                    rightNode.right.value = rightNode.right.value + nRight;
+                    rightNode.value = rightNode.value + nRight;
                 }
 
                 //Replace right node with 0 regular number node
@@ -228,8 +241,25 @@ public class BinaryTree {
         }
     }
 
-    public boolean pair(Node node) {
-        return false;
+    public boolean split(Node node) {
+        if(node == null)
+            return false;
+        if(node.value != null && node.value > 9){
+            int highValue = node.value;
+            int leftValue = highValue / 2;
+            int rightValue =highValue / 2;
+            if(Math.floorMod(highValue, 2) > 0)
+                rightValue++;
+            Node rightNode = new Node(rightValue,node);
+            Node leftNode = new Node(leftValue,node);
+            node.value = null;
+            node.left = leftNode;
+            node.right = rightNode;
+           // System.out.println("Original: " + highValue +" Left split: " + leftValue + " Right split: "+rightValue);
+            return true;
+        }
+        return (split(node.left) || split(node.right));
+
     }
 
     public String traverseInOrder(Node node) {

@@ -35,10 +35,14 @@ public class DayEighteenB {
                 runningCalculation = "[" + runningCalculation + "," + input + "]";
                 tree.create(runningCalculation);
                 runningCalculation = ""+ tree.traverseInOrder(tree.root);
+                System.out.println(runningCalculation);
                 boolean calculating = true;
                 while(calculating){
-                    tree.explode(tree.root, 1, 0);
-                    tree.pair(tree.root);
+                    calculating = (tree.explode(tree.root, 1) || tree.split(tree.root)) ;
+//                    tree.pair(tree.root);
+
+                    runningCalculation = ""+ tree.traverseInOrder(tree.root);
+                    System.out.println(runningCalculation);
                 }
             }
 
