@@ -3,7 +3,16 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/advent2021.iml" filepath="$PROJECT_DIR$/.idea/advent2021.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day10/day10.iml" filepath="$PROJECT_DIR$/day10/day10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day13/day13.iml" filepath="$PROJECT_DIR$/day13/day13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day14/day14.iml" filepath="$PROJECT_DIR$/day14/day14.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day20/day20.iml" filepath="$PROJECT_DIR$/day20/day20.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day21/day21.iml" filepath="$PROJECT_DIR$/day21/day21.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day23/day23.iml" filepath="$PROJECT_DIR$/day23/day23.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day4j/day4j.iml" filepath="$PROJECT_DIR$/day4j/day4j.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day5j/day5j.iml" filepath="$PROJECT_DIR$/day5j/day5j.iml" />
       <module fileurl="file://$PROJECT_DIR$/Day6J/day6J.iml" filepath="$PROJECT_DIR$/Day6J/day6J.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day7j/day7j.iml" filepath="$PROJECT_DIR$/day7j/day7j.iml" />
     </modules>
   </component>
 </project>

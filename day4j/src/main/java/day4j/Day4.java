@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class Day4 {
     public static void main(String[] args) {
         try {
-            File myObj = new File("/Users/cbeam/GIT/advent2021/day4j/src/main/resources/input_day4.txt");
+            File myObj = new File("input_day4.txt");
             Scanner myReader = new Scanner(myObj);
 
             List<String> calledNumbers = Arrays.stream(myReader.nextLine().split(",")).toList();
