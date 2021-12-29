@@ -1,8 +1,6 @@
 package day18;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class BinaryTree {
 
@@ -123,74 +121,65 @@ public class BinaryTree {
     }
 
     private Node findClosestLeftValueNode(Node child) {
-        if (child.parent == null) {
-            if (child.left.value == null) {
-                return findClosestRightDownValueNode(child.left);
-            }
-            else
-                return null;
-        }
-        if (child.parent.left.value != null) {
-            return child.parent.left;
-        }
-        if (child.parent.left.value == null) {
-            Node rightDownNode = findClosestRightDownValueNode(child.parent.left);
-            if (rightDownNode != null)
-                return rightDownNode;
-        }
+        List<Node> nodeOrder = nodeList(this.root);
 
-        return findClosestLeftValueNode(child.parent);
-
-    }
-
-    private Node findClosestRightValueNode(Node child){
-        if(child.parent == null){
-            if(child.right.value == null){
-                return findClosestLeftDownValueNode(child.right);
-            }
-            else
-                return null;
-        }
-        if(child.parent.right.value != null){
-            return child.parent.right;
-        }
-        if(child.parent.right.value == null){
-            Node leftDownNode = findClosestLeftDownValueNode(child.parent.right);
-            if (leftDownNode != null)
-                return leftDownNode;
-        }
-        return findClosestRightValueNode(child.parent);
-
-    }
-
-    private Node findClosestLeftDownValueNode(Node child){
-        if(child.left.value != null){
-            return child.left;
-        }
-        if(child.left.value == null) {
-            Node rightDownNode = findClosestRightDownValueNode(child.left);
-            if (rightDownNode != null)
-                return rightDownNode;
-        }
-
-        return findClosestLeftDownValueNode(child.right);
-
-    }
-
-    private Node findClosestRightDownValueNode(Node child){
-        if(child.right == null)
+        Node returnNode = null;
+        if(nodeOrder.indexOf(child) > 0)
+          returnNode = nodeOrder.get(nodeOrder.indexOf(child) - 1);
+        if (returnNode != null) {
+            return returnNode;
+        } else
             return null;
-        if(child.right.value != null){
-            return child.right;
-        }
-        if(child.right.value == null) {
-            Node leftDownNode = findClosestLeftDownValueNode(child.right);
-            if (leftDownNode != null)
-                return leftDownNode;
-        }
-        return findClosestRightDownValueNode(child.left);
-
     }
+//        if(child.parent == null){
+//            return null;
+//        }
+//        if(child.parent.left.value != null){
+//            return child.parent;
+//        }
+//        else{
+//            return findClosestLeftValueNode(child.parent);
+//        }
+//    }
+
+    private Node findClosestRightValueNode(Node child) {
+        List<Node> nodeOrder = nodeList(this.root);
+//        for (Node node:nodeOrder
+//             ) {
+//            System.out.print(node.value+" ");
+//        }
+//        System.out.println();
+        Node returnNode = null;
+        if(nodeOrder.indexOf(child)+1 < nodeOrder.size())
+            returnNode = nodeOrder.get(nodeOrder.indexOf(child) + 1);
+        if (returnNode != null) {
+            return returnNode;
+        } else
+            return null;
+    }
+//        if(child.parent == null){
+//            if(child.right.value == null){
+//                return findClosestLeftDownValueNode(child.right);
+//            }
+//            else
+//                return null;
+//        }
+//        if(child.parent.right.value != null){
+//            return child.parent.right;
+//        }
+//        else{
+//            return findClosestRightValueNode(child.parent);
+//        }
+//    }
+//
+//    private Node findClosestLeftDownValueNode(Node child){
+//        if(child.left.value != null){
+//            return child.left;
+//        }
+//        else{
+//            return findClosestLeftDownValueNode(child.right);
+//        }
+//    }
 
     public boolean explode(Node node, int level) {
 
@@ -206,24 +195,24 @@ public class BinaryTree {
             if (node.left.value == null) {
                 nLeft = node.left.left.value;
                 nRight = node.left.right.value;
-                node.left.left = null;
-                node.left.right = null;
+//                node.left.left = null;
+//                node.left.right = null;
 
                 //Left
-                Node leftNode = findClosestLeftValueNode(node);
+                Node leftNode = findClosestLeftValueNode(node.left.left);
                 if (leftNode != null)  {
                     leftNode.value = leftNode.value + nLeft;
                 }
 
                 //Right
                 Node rightNode = null;
-                if(node.right.value != null){
-                    rightNode = node;
-                }
-                else {
-                    rightNode = findClosestRightValueNode(node);
+//                if(node.right.value != null){
+//                    rightNode = node;
+//                }
+//                else {
+                    rightNode = findClosestRightValueNode(node.left.right);
 //                    rightNode = findClosestLeftValueNode(node);
-                }
+//                }
                 if (rightNode != null) {
                     rightNode.value = rightNode.value + nRight;
                 }
@@ -238,23 +227,23 @@ public class BinaryTree {
             if (node.right.value == null) {
                 nLeft = node.right.left.value;
                 nRight = node.right.right.value;
-                node.right.left = null;
-                node.right.right = null;
+//                node.right.left = null;
+//                node.right.right = null;
 
                 //Left
                 Node leftNode = null;
-                if(node.left.value != null){
-                    leftNode = node;
-                }
-                else {
-                    leftNode = findClosestLeftValueNode(node);
-                }
+//                if(node.left.value != null){
+//                    leftNode = node;
+//                }
+//                else {
+                    leftNode = findClosestLeftValueNode(node.right.left);
+//                }
                 if (leftNode != null) {
-                    leftNode.left.value = leftNode.left.value + nLeft;
+                    leftNode.value = leftNode.value + nLeft;
                 }
 
                 //Right
-                Node rightNode = findClosestRightValueNode(node);
+                Node rightNode = findClosestRightValueNode(node.right.right);
                 if (rightNode != null)  {
                     rightNode.value = rightNode.value + nRight;
                 }
@@ -269,8 +258,13 @@ public class BinaryTree {
             return false;
         }
         else{
-            level++;
-            return (explode(node.left, level ) || explode(node.right, level));
+            if(node != null) {
+                level++;
+                return (explode(node.left, level) || explode(node.right, level));
+            }
+            else{
+                return false;
+            }
         }
     }
 
@@ -293,6 +287,35 @@ public class BinaryTree {
         }
         return (split(node.left) || split(node.right));
 
+    }
+
+    private List<Node> nodeList(Node node){
+        List<Node> nodeOrder = new ArrayList<>();
+        if(node != null) {
+            if (node.value == null) {
+               nodeOrder.addAll(nodeList(node.left));
+               nodeOrder.addAll(nodeList(node.right));
+            }
+            else{
+                nodeOrder.add(node);
+            }
+        }
+        return nodeOrder;
+
+    }
+
+    public long magnitude(Node node){
+        long magnitude = 0;
+        if(node != null){
+            if(node.value == null){
+                magnitude = magnitude + (3*magnitude(node.left));
+                magnitude = magnitude + (2*magnitude(node.right));
+            }
+            else{
+                magnitude = magnitude + node.value;
+            }
+        }
+        return magnitude;
     }
 
     public String traverseInOrder(Node node) {
