@@ -11,7 +11,7 @@ public class DaySeven {
         List<Integer> locations = new ArrayList<>();
         int limit = 0;
         try {
-            File myObj = new File("/Users/cbeam/GIT/advent2021/day7j/src/main/resources/input_day7.txt");
+            File myObj = new File("/GIT/advent2021/day7j/src/main/resources/input_day7.txt");
             Scanner myReader = new Scanner(myObj);
             String[] input;
             while (myReader.hasNextLine()) {

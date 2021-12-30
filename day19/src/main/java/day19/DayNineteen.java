@@ -9,7 +9,7 @@ public class DayNineteen {
     public static void main(String[] args) {
         List<String> inputs = new ArrayList<>();
         try {
-            File myObj = new File("/Users/cbeam/GIT/advent2021/day20/src/main/resources/input_day19.txt");
+            File myObj = new File("/GIT/advent2021/day20/src/main/resources/input_day19.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 inputs.add(myReader.nextLine());

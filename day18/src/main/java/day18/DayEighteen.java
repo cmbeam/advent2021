@@ -15,7 +15,7 @@ public class DayEighteen {
     public static void main(String[] args) {
         List<String> inputs = new ArrayList<>();
         try {
-            File myObj = new File("/Users/cbeam/GIT/advent2021/day18/src/main/resources/test_day18.txt");
+            File myObj = new File("/GIT/advent2021/day18/src/main/resources/test_day18.txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {

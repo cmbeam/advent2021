@@ -13,7 +13,7 @@ public class DayTwenty {
         Map<Point, Character> imageArray = new HashMap<>();
 
         try {
-            File myObj = new File("/Users/cbeam/GIT/advent2021/day20/src/main/resources/input_day20.txt");
+            File myObj = new File("/GIT/advent2021/day20/src/main/resources/input_day20.txt");
             Scanner myReader = new Scanner(myObj);
             ieAlgorithm = myReader.nextLine().toCharArray();
             myReader.nextLine();
